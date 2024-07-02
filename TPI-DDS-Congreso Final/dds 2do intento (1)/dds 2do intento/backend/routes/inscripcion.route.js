@@ -18,6 +18,28 @@ router.get("/inscripcion", async (_, res) => {
     }
 });
 
+
+//Filtrar inscripciones por Participante
+router.get("/inscripcion/participante/:filtro", async(req, res) => {
+    try {
+        const participante = req.params.filtro;
+        console.log("Filtro recibido", participante);
+        const inscripcion = await db.Inscripciones.findAll({
+            where: {
+                IdParticipante: participante,
+            },
+        });
+    if (inscripcion.length === 0) {
+        res.status(404).send({ mensaje: "Inscripcion no encontrada"});
+    } else{
+        res.json(inscripcion);
+    }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({mensaje: "Error interno"})
+    }
+});
+
 //Filtrar inscripciones por ID
 router.get("/inscripcion/:id", async (req, res) => {
     try {

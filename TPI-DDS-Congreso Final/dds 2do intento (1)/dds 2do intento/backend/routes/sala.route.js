@@ -18,6 +18,25 @@ router.get("/sala", async (_, res) => {
     }
 });
 
+//Filtrar sala por nombre
+router.get("/sala/:nombre", async (req, res) => {
+    try {
+        const nombre = req.params.nombre;
+        const sala = await db.Salas.findAll({
+            where: {
+                NombreSala: nombre
+            }
+        });
+        if (!sala || sala.length === 0) {
+            res.status(404).send({ mensaje: "Sala no encontrada" });
+        } else {
+            res.json(sala);
+        }
+    } catch (error) {
+        res.status(500).send({ mensaje: "Error al buscar sala" });
+    }
+});
+
 //Filtrar Sala por ID
 router.get("/sala/:id", async (req, res) => {
     try {

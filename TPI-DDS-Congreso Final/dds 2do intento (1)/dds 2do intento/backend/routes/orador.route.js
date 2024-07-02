@@ -18,6 +18,24 @@ router.get("/orador", async (_, res) => {
     }
 });
 
+//Filtrar oradores por nombre
+router.get("/orador/:nombre", async (req, res) => {
+    try {
+        const nombre = req.params.nombre;
+        const orador = await db.Oradores.findAll({
+            where: {Nombre: { [Op.like]: nombre + "%"  }}
+        });
+        if (!orador || orador.length === 0) {
+            res.status(404).send({ mensaje: "Orador no encontrado" });
+        } else {
+            res.json(orador);
+        }
+    } catch (error) {
+        res.status(500).send({ mensaje: "Error al buscar Orador" });
+    }
+});
+
+
 //Filtrar oradores por ID
 router.get("/orador/:id", async (req, res) => {
     try {

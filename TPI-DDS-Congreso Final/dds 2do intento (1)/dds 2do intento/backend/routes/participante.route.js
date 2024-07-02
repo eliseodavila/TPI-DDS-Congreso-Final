@@ -17,6 +17,22 @@ router.get("/participante", async (_, res) => {
         res.status(500).send({ mensaje: "Error interno al buscar participantes" });
     }
 });
+//Filtrar por nombre
+router.get("/participante/:nombre", async (req, res) => {
+    try {
+        const nombre = req.params.nombre;
+        const participante = await db.Participantes.findAll({
+            where: {NombreParticipante: { [Op.like]: nombre + "%"  }}
+        });
+        if (!participante || participante.length === 0) {
+            res.status(404).send({ mensaje: "Participante no encontrado" });
+        } else {
+            res.json(participante);
+        }
+    } catch (error) {
+        res.status(500).send({ mensaje: "Error al buscar Participante" });
+    }
+});
 
 //Filtrar Participantes por ID
 router.get("/participante/:id", async (req, res) => {

@@ -17,6 +17,24 @@ router.get("/congreso", async (_, res) => {
         res.status(500).send({ mensaje: "Error interno al buscar tipos de congreso" });
     }
 });
+
+//Filtrar Congreso por nombre
+router.get("/congreso/:nombre", async (req, res) => {
+    try {
+        const nombre = req.params.nombre;
+        const congreso = await db.Congreso.findAll({
+            where: {NombreCongreso: { [Op.like]: nombre + "%"  }}
+        });
+        if (!congreso || congreso.length === 0) {
+            res.status(404).send({ mensaje: "Congreso no encontrado" });
+        } else {
+            res.json(congreso);
+        }
+    } catch (error) {
+        res.status(500).send({ mensaje: "Error al buscar Congreso" });
+    }
+});
+
 //Filtrar congreso por ID
 router.get("/congreso/:id", async (req, res) => {
     try {
@@ -27,7 +45,7 @@ router.get("/congreso/:id", async (req, res) => {
             }
         });
         if (!congreso) {
-            res.status(404).send({mensaje: "congreso no encontrado"});
+            res.status(404).send({mensaje: "Congreso no encontrado"});
         } else {
             res.json(congreso);
         } 

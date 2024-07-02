@@ -175,6 +175,7 @@ const Inscripciones = sequelize.define('Inscripciones', {
     EstadoInscripcion: {
         type: DataTypes.STRING(100),
         allowNull: false,
+        defaultValue:'En espera',
         validate: {
             isIn: {
                 args: [['Confirmada', 'En espera']],

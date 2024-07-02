@@ -44,6 +44,7 @@ export default function Sala(){
     }
     const onCancelar = () => {
         setAction('C')
+        setItem({})
     }
 
     const actualizado = async (id, data) => {

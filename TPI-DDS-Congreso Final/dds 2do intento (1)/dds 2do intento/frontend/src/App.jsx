@@ -9,6 +9,7 @@ import {Footer} from './components/Footer'
 import PagInicio from "./components/PagInicio"
 import Evaluacion from './components/Evaluacion/Evaluacion'
 import Congresos from './components/Congreso/TablaCongreso'
+import Inscripcion from './components/Inscripcion/Inscripcion'
 
 import Sala from './components/Sala/Sala'
 import Congreso from './components/Congreso/Congreso'
@@ -36,6 +37,7 @@ function App() {
           <Route path="/orador" element={<Orador/>}/>
           <Route path="/participante" element={<Participante/>}/>
           <Route path="/patrocinador" element={<Patrocinador/>}/>
+          <Route path="/inscripcion" element={<Inscripcion/>}/>
           <Route path="*" element={<Navigate to="/Inicio" replace />}/> 
                 
           </Routes>

@@ -85,6 +85,17 @@ router.delete("/evaluacion/:id", async (req, res) => {
 router.post("/evaluacion", async (req, res) => {
     try {
         const evaluacion= req.body;
+        const congreso = await db.Congreso.findOne({ where: { Id: evaluacion.IdCongreso, Activo: true } });
+        if (!congreso) {
+            return res.status(400).send({ mensaje: "IdCongreso no existe o no está activo" });
+        }
+        
+
+        const participante = await db.Participantes.findOne({ where: { Id: evaluacion.IdParticipante, Activo: true } });
+        if (!participante) {
+            return res.status(400).send({ mensaje: "IdParticipante no existe o no está activo" });
+        }
+
         const nuevaEvaluacion = await db.Evaluaciones.create({
             IdCongreso: evaluacion.IdCongreso,
             IdParticipante: evaluacion.IdParticipante,
@@ -103,14 +114,18 @@ router.put("/evaluacion/:id", async (req, res) => {
     try {
         const id = req.params.id;
         const datosActuales = req.body;
+
         const evaluacion = await db.Evaluaciones.findByPk(id);
         if (!evaluacion) {
             res.status(404).send({ mensaje: "Evaluación no encontrada" });
-        } else {
+        } 
+        
+            
+        
+
             const actualizarEvaluacion = await db.Evaluaciones.update(
                 {
-                    IdCongreso: datosActuales.IdCongreso,
-                    IdParticipante: datosActuales.IdParticipante,
+                   
                     Puntuacion: datosActuales.Puntuacion,
                     Comentarios: datosActuales.Comentarios,
                     Fecha: datosActuales.Fecha,
@@ -122,7 +137,7 @@ router.put("/evaluacion/:id", async (req, res) => {
                 }
             );
             res.status(200).send({mensaje: "Evaluacion actualizada"});
-        }
+        
     } catch (error) {
         res.status(500).send({ mensaje: "Error al actualizar la evaluación" });
     }

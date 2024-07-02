@@ -43,6 +43,7 @@ export default function TipoCongreso(){
     }
     const onCancelar = () => {
         setAction('C')
+        setItem({})
     }
 
     const actualizado = async (id, data) => {

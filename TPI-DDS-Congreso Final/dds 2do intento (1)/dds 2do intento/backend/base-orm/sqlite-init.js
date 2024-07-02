@@ -215,7 +215,7 @@ async function CrearBaseSiNoExiste() {
                     IdParticipante INTEGER,
                     IdCongreso INTEGER,
                     FechaInscripcion DATE,
-                    EstadoInscripcion TEXT,
+                    EstadoInscripcion TEXT DEFAULT 'En espera',
                     FOREIGN KEY (IdParticipante) REFERENCES Participantes(Id),
                     FOREIGN KEY (IdCongreso) REFERENCES Congreso(Id)
                 )

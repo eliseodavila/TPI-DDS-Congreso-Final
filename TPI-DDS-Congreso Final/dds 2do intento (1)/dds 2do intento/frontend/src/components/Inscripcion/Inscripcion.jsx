@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import servicesParticipante from "../../../services/participante.service.js"
 
-import TablaParticipante from "./TablaParticipante.jsx"
-import RegistrarParticipante from "./RegistrarParticpante.jsx"
+import servicesInscripcion from "../../../services/inscripcion.service.js"
 
+import TablaInscripcion from "./TablaInscripcion.jsx"
+import RegistroInscripcion from "./RegistroInscripcion.jsx"
 
-export default function Participante(){
+export default function Inscripcion(){
     const [rows, setRows] = useState([])
     const [action, setAction] = useState('C')
     const [item, setItem] = useState({})
-
+    
     const loadGrid = async() =>{
-        const data = await servicesParticipante.getParticipante()
+        const data = await servicesInscripcion.getInscripciones()
         setRows(data)
     }
 
     useEffect(() => {
         loadGrid()
     }, [])
-
-    const onEliminar = async (id) => {
-        await servicesParticipante.eliminarParticipante(id)
-        loadGrid()
-    }
 
     const onNewClick = () => {
         setAction('N')
@@ -34,7 +29,7 @@ export default function Participante(){
     }
 
     const onGuardar = async (data) => {
-        const result = await servicesParticipante.crearParticipante(data)
+        const result = await servicesInscripcion.crearInscripciones(data)
         if(result){
             loadGrid()
             setAction('C')
@@ -45,15 +40,18 @@ export default function Participante(){
         setAction('C')
         setItem({})
     }
-
     const actualizado = async (id, data) => {
-        const result = await servicesParticipante.actualizarParticipante(id, data)
+        const result = await servicesInscripcion.actualizarInscripciones(id, data)
         if(result){
             loadGrid()
             setAction('C')
             setItem({})
         }
     }
+    const onEliminar = async (id) => {
+        await servicesInscripcion.eliminarInscripciones(id)
+        loadGrid()
+}
 
     return (
         <>
@@ -61,18 +59,20 @@ export default function Participante(){
                 action === 'C' && (
                     <>
                          
-                         <TablaParticipante rows={rows} onNewClick={onNewClick} onActualizar={onActualizar} onEliminar={onEliminar} ></TablaParticipante>
+                         <TablaInscripcion rows={rows} onNewClick={onNewClick} onActualizar={onActualizar} onEliminar={onEliminar} ></TablaInscripcion>
                     </>
                 ) 
             }
             {
                 action !== 'C' && (
                     <>
-                        <RegistrarParticipante onGuardar={onGuardar} onCancelar={onCancelar} item = {item} actualizado={actualizado}/>
+                        <RegistroInscripcion  onGuardar={onGuardar} onCancelar={onCancelar} item = {item} actualizado={actualizado}/>
                     </>
                 )
             }
         </>
     )
 
-}
+
+
+} 

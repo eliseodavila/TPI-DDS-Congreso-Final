@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import servicesInscripcion from "../../../services/inscripcion.service.js"
-
+import Filtro from './FiltroInscripcion.jsx'
 import TablaInscripcion from "./TablaInscripcion.jsx"
 import RegistroInscripcion from "./RegistroInscripcion.jsx"
 
@@ -52,13 +52,22 @@ export default function Inscripcion(){
         await servicesInscripcion.eliminarInscripciones(id)
         loadGrid()
 }
+    const loadGrid2 = async(filter) =>{
+        const data = await servicesInscripcion.getByFilters(filter)
+        setRows(data)
+        }
+
+    const onConsultar = async (filter) => {
+        loadGrid2(filter)
+    }
+
 
     return (
         <>
             {
                 action === 'C' && (
                     <>
-                         
+                         <Filtro onConsultar={onConsultar}  loadGrid= {loadGrid}></Filtro>
                          <TablaInscripcion rows={rows} onNewClick={onNewClick} onActualizar={onActualizar} onEliminar={onEliminar} ></TablaInscripcion>
                     </>
                 ) 

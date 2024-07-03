@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import servicesTipoCongreso from "../../../services/tipocongreso.service.js"
-
+import Filtro from '../FiltroNombre.jsx'
 import TablaTipoCongreso from "./TablaTipoCongreso.jsx"
 import RegistroTipoCongreso from './RegistroTipoCongreso.jsx'
 
@@ -54,13 +54,21 @@ export default function TipoCongreso(){
             setItem({})
         }
     }
+    const loadGrid2 = async(filter) =>{
+        const data = await servicesTipoCongreso.getByFilters(filter)
+        setRows(data)
+        }
+
+    const onConsultar = async (filter) => {
+        loadGrid2(filter)
+    }
 
     return (
         <>
             {
                 action === 'C' && (
                     <>
-                         
+                          <Filtro onConsultar={onConsultar}  loadGrid= {loadGrid}></Filtro>
                          <TablaTipoCongreso rows={rows} onNewClick={onNewClick} onActualizar={onActualizar} onEliminar={onEliminar} ></TablaTipoCongreso>
                     </>
                 ) 

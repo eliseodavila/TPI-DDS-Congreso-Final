@@ -46,5 +46,17 @@ async function crearInscripciones(data) {
     }
    
   }
+
+
+  async function getByFilters(filter){
+    let newUrl = API_URL + "/participante/" + filter;
+    try{
+        return await axios.get(newUrl).then((response) => {
+            return response.data; });
+    }
+    catch (error) {
+        throw error;
+    }
+}
   
-export default {getInscripciones, crearInscripciones, actualizarInscripciones, eliminarInscripciones}
+export default {getInscripciones, crearInscripciones, actualizarInscripciones, eliminarInscripciones, getByFilters}

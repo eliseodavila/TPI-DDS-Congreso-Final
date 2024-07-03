@@ -3,7 +3,7 @@ import servicesCongreso from "../../../services/congreso.service.js"
 
 import TablaCongreso from "./TablaCongreso.jsx"
 import RegistroCongreso from "./RegistroCongreso.jsx"
-import Filtro from './FiltroCongreso.jsx'
+import Filtro from '../FiltroNombre.jsx'
 
 export default function Congreso(){
     const [rows, setRows] = useState([])

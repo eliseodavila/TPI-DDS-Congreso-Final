@@ -19,7 +19,7 @@ router.get("/orador", async (_, res) => {
 });
 
 //Filtrar oradores por nombre
-router.get("/orador/:nombre", async (req, res) => {
+router.get("/orador/nombre/:nombre", async (req, res) => {
     try {
         const nombre = req.params.nombre;
         const orador = await db.Oradores.findAll({

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import servicesOrador from "../../../services/orador.service.js"
-
+import Filtro from '../FiltroNombre.jsx'
 import TablaOrador from "./TablaOrador.jsx"
 import RegistrarOrador from "./RegistrarOrador.jsx"
 
@@ -54,13 +54,21 @@ export default function Orador(){
             setItem({})
         }
     }
+    const loadGrid2 = async(filter) =>{
+        const data = await servicesOrador.getByFilters(filter)
+        setRows(data)
+        }
+
+    const onConsultar = async (filter) => {
+        loadGrid2(filter)
+    }
 
     return (
         <>
             {
                 action === 'C' && (
                     <>
-                         
+                         <Filtro onConsultar={onConsultar}  loadGrid= {loadGrid}></Filtro>
                          <TablaOrador rows={rows} onNewClick={onNewClick} onActualizar={onActualizar} onEliminar={onEliminar} ></TablaOrador>
                     </>
                 ) 

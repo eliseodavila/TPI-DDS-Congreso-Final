@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import servicesPatrocinador from "../../../services/patrocinador.service.js"
-
+import Filtro from '../FiltroNombre.jsx'
 import TablaPatrocinador from "./TablaPatrocinador.jsx"
 import RegistrarPatrocinador from "./RegistrarPatrocinador.jsx"
 
@@ -55,12 +55,21 @@ export default function Patrocinador(){
         }
     }
 
+    const loadGrid2 = async(filter) =>{
+        const data = await servicesPatrocinador.getByFilters(filter)
+        setRows(data)
+        }
+
+    const onConsultar = async (filter) => {
+        loadGrid2(filter)
+    }
+
     return (
         <>
             {
                 action === 'C' && (
                     <>
-                         
+                         <Filtro onConsultar={onConsultar}  loadGrid= {loadGrid}></Filtro>
                          <TablaPatrocinador rows={rows} onNewClick={onNewClick} onActualizar={onActualizar} onEliminar={onEliminar} ></TablaPatrocinador>
                     </>
                 ) 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import servicesSala from "../../../services/sala.service.js"
-
+import Filtro from '../FiltroNombre.jsx'
 import TablaSala from "./TablaSala.jsx"
 import RegistroSala from './RegistroSala.jsx'
 
@@ -55,13 +55,21 @@ export default function Sala(){
             setItem({})
         }
     }
+    const loadGrid2 = async(filter) =>{
+        const data = await servicesSala.getByFilters(filter)
+        setRows(data)
+        }
+
+    const onConsultar = async (filter) => {
+        loadGrid2(filter)
+    }
 
     return (
         <>
             {
                 action === 'C' && (
                     <>
-                         
+                         <Filtro onConsultar={onConsultar}  loadGrid= {loadGrid}></Filtro>
                          <TablaSala rows={rows} onNewClick={onNewClick} onActualizar={onActualizar} onEliminar={onEliminar} ></TablaSala>
                     </>
                 ) 

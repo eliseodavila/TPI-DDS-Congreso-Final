@@ -48,5 +48,16 @@ async function eliminarSala(id) {
     
   }
 
+  async function getByFilters(filter){
+    let newUrl = API_URL + "/nombre/" + filter;
+    try{
+        return await axios.get(newUrl).then((response) => {
+            return response.data; });
+    }
+    catch (error) {
+        throw error;
+    }
+}
 
-export default {getSalas, eliminarSala, actualizarSala, crearSala}
+
+export default {getSalas, eliminarSala, actualizarSala, crearSala, getByFilters}

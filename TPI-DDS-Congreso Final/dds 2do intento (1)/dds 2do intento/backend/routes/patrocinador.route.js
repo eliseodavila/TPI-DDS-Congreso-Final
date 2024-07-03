@@ -21,7 +21,7 @@ router.get("/patrocinador", async (_, res) => {
 
 //Buscar patrocinador por nombre
 
-router.get("/patrocinador/:nombre", async (req, res) => {
+router.get("/patrocinador/nombre/:nombre", async (req, res) => {
     try {
         const nombre = req.params.nombre;
         const patrocinador = await db.Patrocinadores.findAll({

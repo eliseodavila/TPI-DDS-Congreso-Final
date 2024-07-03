@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import servicesParticipante from "../../../services/participante.service.js"
-
+import Filtro from '../FiltroNombre.jsx'
 import TablaParticipante from "./TablaParticipante.jsx"
 import RegistrarParticipante from "./RegistrarParticpante.jsx"
 
@@ -54,13 +54,22 @@ export default function Participante(){
             setItem({})
         }
     }
+    const loadGrid2 = async(filter) =>{
+        const data = await servicesParticipante.getByFilters(filter)
+        setRows(data)
+        }
+
+    const onConsultar = async (filter) => {
+        loadGrid2(filter)
+    }
+
 
     return (
         <>
             {
                 action === 'C' && (
                     <>
-                         
+                          <Filtro onConsultar={onConsultar}  loadGrid= {loadGrid}></Filtro>
                          <TablaParticipante rows={rows} onNewClick={onNewClick} onActualizar={onActualizar} onEliminar={onEliminar} ></TablaParticipante>
                     </>
                 ) 

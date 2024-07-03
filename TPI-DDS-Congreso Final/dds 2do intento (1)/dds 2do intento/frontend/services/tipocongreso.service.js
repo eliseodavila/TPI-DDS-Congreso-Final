@@ -47,6 +47,16 @@ async function eliminarTipoCongreso(id) {
     }
     
   }
+  async function getByFilters(filter){
+    let newUrl = API_URL + "/nombre/" + filter;
+    try{
+        return await axios.get(newUrl).then((response) => {
+            return response.data; });
+    }
+    catch (error) {
+        throw error;
+    }
+}
 
 
-export default {getTipoCongreso, eliminarTipoCongreso, actualizarTipoCongreso, crearTipoCongreso}
+export default {getTipoCongreso, eliminarTipoCongreso, actualizarTipoCongreso, crearTipoCongreso, getByFilters}

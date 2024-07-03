@@ -47,6 +47,15 @@ async function eliminarOrador(id) {
     }
     
   }
+  async function getByFilters(filter){
+    let newUrl = API_URL + "/nombre/" + filter;
+    try{
+        return await axios.get(newUrl).then((response) => {
+            return response.data; });
+    }
+    catch (error) {
+        throw error;
+    }
+}
 
-
-export default {getOrador, eliminarOrador, actualizarOrador, crearOrador}
+export default {getOrador, eliminarOrador, actualizarOrador, crearOrador, getByFilters}

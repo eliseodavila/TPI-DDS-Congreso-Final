@@ -9,9 +9,9 @@ export default function Filtro({ onConsultar,loadGrid }) {
 
     return (
         <div className="card">
-            <h6 className="card-header">Consulta de Congresos</h6>
+            <h6 className="card-header">Consulta </h6>
             <div className="card-body">
-                <h6>Ingrese nombre del Congreso</h6>
+                <h6>Ingrese identificador de Congreso</h6>
                 <input type='text' onChange={(e)=>{setFilter(e.target.value)}} className='mx-1'></input>
                 <button className="btn btn-success mx-1" onClick={onClick} >Consultar</button>
                 <button className="btn btn-success mx-1" onClick={loadGrid} >Volver</button>

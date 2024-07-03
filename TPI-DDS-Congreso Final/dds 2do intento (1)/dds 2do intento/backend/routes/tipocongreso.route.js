@@ -20,11 +20,11 @@ router.get("/tipocongreso", async(_,res) => {
     });
 
 //Filtrar TipoCongreso por nombre
-router.get("/tipocongreso/:nombre", async (req, res) => {
+router.get("/tipocongreso/nombre/:nombre", async (req, res) => {
     try {
         const nombre = req.params.nombre;
         const tipocongreso = await db.TipoCongresos.findAll({
-            where: { Nombre: { [Op.like]: nombre + "%" } }
+            where: { Nombre: { [Op.like]: "%" + nombre + "%" } }
         });
         if (!tipocongreso || tipocongreso.length === 0) {
             res.status(404).send({ mensaje: "Tipo Congreso no encontrado" });

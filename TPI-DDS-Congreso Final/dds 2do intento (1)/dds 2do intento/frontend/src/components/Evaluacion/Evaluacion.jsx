@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import servicesEvaluacion from "../../../services/evaluacion.service.js"
-
+import Filtro from './FiltroEvaluacion.jsx'
 import TablaEvaluacion from "./TablaEvaluacion.jsx"
 import RegistroEvaluacion from "./RegistroEvaluacion.jsx"
 
@@ -53,12 +53,21 @@ export default function Evaluacion(){
         loadGrid()
 }
 
+    const loadGrid2 = async(filter) =>{
+    const data = await servicesEvaluacion.getByFilters(filter)
+    setRows(data)
+    }
+
+    const onConsultar = async (filter) => {
+        loadGrid2(filter)
+    }
+
     return (
         <>
             {
                 action === 'C' && (
                     <>
-                         
+                         <Filtro onConsultar={onConsultar}  loadGrid= {loadGrid}></Filtro>
                          <TablaEvaluacion rows={rows} onNewClick={onNewClick} onActualizar={onActualizar} onEliminar={onEliminar} ></TablaEvaluacion>
                     </>
                 ) 

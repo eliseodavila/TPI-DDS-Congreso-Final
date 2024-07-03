@@ -19,7 +19,7 @@ router.get("/sala", async (_, res) => {
 });
 
 //Filtrar sala por nombre
-router.get("/sala/:nombre", async (req, res) => {
+router.get("/sala/nombre/:nombre", async (req, res) => {
     try {
         const nombre = req.params.nombre;
         const sala = await db.Salas.findAll({

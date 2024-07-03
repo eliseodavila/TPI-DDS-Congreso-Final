@@ -18,7 +18,7 @@ router.get("/participante", async (_, res) => {
     }
 });
 //Filtrar por nombre
-router.get("/participante/:nombre", async (req, res) => {
+router.get("/participante/nombre/:nombre", async (req, res) => {
     try {
         const nombre = req.params.nombre;
         const participante = await db.Participantes.findAll({

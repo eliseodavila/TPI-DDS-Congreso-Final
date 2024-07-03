@@ -46,5 +46,16 @@ async function crearEvaluacion(data) {
     }
    
   }
+
+  async function getByFilters(filter){
+    let newUrl = API_URL + "/congreso/" + filter;
+    try{
+        return await axios.get(newUrl).then((response) => {
+            return response.data; });
+    }
+    catch (error) {
+        throw error;
+    }
+}
   
-export default {getEvaluaciones, crearEvaluacion, actualizarEvaluacion, eliminarEvaluacion}
+export default {getEvaluaciones, crearEvaluacion, actualizarEvaluacion, eliminarEvaluacion, getByFilters}

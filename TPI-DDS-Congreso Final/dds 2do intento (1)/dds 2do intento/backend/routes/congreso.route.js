@@ -19,7 +19,7 @@ router.get("/congreso", async (_, res) => {
 });
 
 //Filtrar Congreso por nombre
-router.get("/congreso/:nombre", async (req, res) => {
+router.get("/congreso/nombre/:nombre", async (req, res) => {
     try {
         const nombre = req.params.nombre;
         const congreso = await db.Congreso.findAll({

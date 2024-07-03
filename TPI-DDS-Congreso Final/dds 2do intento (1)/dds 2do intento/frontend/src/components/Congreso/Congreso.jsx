@@ -3,7 +3,7 @@ import servicesCongreso from "../../../services/congreso.service.js"
 
 import TablaCongreso from "./TablaCongreso.jsx"
 import RegistroCongreso from "./RegistroCongreso.jsx"
-
+import Filtro from './FiltroCongreso.jsx'
 
 export default function Congreso(){
     const [rows, setRows] = useState([])
@@ -54,13 +54,21 @@ export default function Congreso(){
             setItem({})
         }
     }
+    const loadGrid2 = async(filter) =>{
+        const data = await servicesCongreso.getByFilters(filter)
+        setRows(data)
+    }
+
+    const onConsultar = async (filter) => {
+        loadGrid2(filter)
+    }
 
     return (
         <>
             {
                 action === 'C' && (
                     <>
-                         
+                         <Filtro onConsultar={onConsultar}  loadGrid= {loadGrid}></Filtro>
                          <TablaCongreso rows={rows} onNewClick={onNewClick} onActualizar={onActualizar} onEliminar={onEliminar} ></TablaCongreso>
                     </>
                 ) 

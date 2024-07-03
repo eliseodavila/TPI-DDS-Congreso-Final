@@ -43,6 +43,7 @@ export default function Orador(){
     }
     const onCancelar = () => {
         setAction('C')
+        setItem({})
     }
 
     const actualizado = async (id, data) => {

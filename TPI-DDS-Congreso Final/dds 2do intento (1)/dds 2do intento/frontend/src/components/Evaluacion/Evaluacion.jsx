@@ -38,6 +38,7 @@ export default function Evaluacion(){
     }
     const onCancelar = () => {
         setAction('C')
+        setItem({})
     }
     const actualizado = async (id, data) => {
         const result = await servicesEvaluacion.actualizarEvaluacion(id, data)

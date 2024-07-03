@@ -1,14 +1,14 @@
 import request from "supertest";
 import app from "../index.js";
 
-describe("GET /evaluacion", () => {
+describe("GET /inscripcion", () => {
   test("Debería responder un statusCode 200", async () => {
-    const response = await request(app).get("/evaluacion").send();
+    const response = await request(app).get("/inscripcion").send();
     expect(response.statusCode).toBe(200);
   });
 
   test("Debería devolver un array con objetos", async () => {
-    const response = await request(app).get("/evaluacion").send();
+    const response = await request(app).get("/inscripcion").send();
     expect(Array.isArray(response.body)).toBe(true);
     expect(response.body).toEqual(
       expect.arrayContaining([
@@ -16,17 +16,17 @@ describe("GET /evaluacion", () => {
           Id: expect.any(Number),
           IdCongreso: expect.any(Number),
           IdParticipante: expect.any(Number),
-          Puntuacion: expect.any(Number),
-          Comentarios: expect.any(String),
-          Fecha: expect.any(String),
+          FechaInscripcion: expect.any(String),
+          EstadoInscripcion: expect.any(String),
         }),
       ])
     );
   });
 });
-describe("GET /evaluacion/congreso/:filtro", function () {
-  it("Evaluacion por Congreso", async function () {
-    const res = await request(app).get("/evaluacion/congreso/4");
+
+describe("GET /inscripcion/participante/:filtro", function () {
+  it("Evaluacion por Participante", async function () {
+    const res = await request(app).get("/inscripcion/participante/4");
     expect(res.statusCode).toBe(200);
     expect(res.body).toBeInstanceOf(Object);
   });
@@ -34,13 +34,12 @@ describe("GET /evaluacion/congreso/:filtro", function () {
 
 
 describe("POST /evaluacion", function () {
-  it("Crea una evaluacion", async function () {
-    const res = await request(app).post("/evaluacion").send({
-      IdCongreso: 7,
-      IdParticipante: 7,
-      Puntuacion: "4",
-      Comentarios: "Comentario de prueba",
-      Fecha: "2024-07-20",
+  it("Crea una Inscripcion", async function () {
+    const res = await request(app).post("/inscripcion").send({
+      IdCongreso: 6,
+      IdParticipante: 6,
+      FechaInscripcion: "2024-09-01",
+      EstadoInscripcion: "Confirmada",
     });
     expect(res.statusCode).toBe(201);
     expect(res.body).toBeInstanceOf(Object);

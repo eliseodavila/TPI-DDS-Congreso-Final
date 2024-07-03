@@ -33,7 +33,7 @@ describe("GET /inscripcion/participante/:filtro", function () {
 });
 
 
-describe("POST /evaluacion", function () {
+describe("POST /inscripcion", function () {
   it("Crea una Inscripcion", async function () {
     const res = await request(app).post("/inscripcion").send({
       IdCongreso: 6,
@@ -46,15 +46,14 @@ describe("POST /evaluacion", function () {
   });
 });
 
-describe("PUT /evaluacion/:id", function () {
-  it("Actualizar una evaluacion", async function () {
-    const idEvaluacion = 5;
-    const res = await request(app).put(`/evaluacion/${idEvaluacion}`).send({
-      IdCongreso: 7,
-      IdParticipante: 7,
-      Puntuacion: "4",
-      Comentarios: "Comentario de prueba",
-      Fecha: "2024-07-20",
+describe("PUT /inscripcion/:id", function () {
+  it("Actualizar una inscripcion", async function () {
+    const idInscripcion = 5;
+    const res = await request(app).put(`/inscripcion/${idInscripcion}`).send({
+      IdCongreso: 2,
+      IdParticipante: 2,
+      FechaInscripcion: "2024-09-02",
+      EstadoInscripcion: "Confirmada",
     });
     expect(res.statusCode).toBe(200);
     expect(res.body).toBeInstanceOf(Object);

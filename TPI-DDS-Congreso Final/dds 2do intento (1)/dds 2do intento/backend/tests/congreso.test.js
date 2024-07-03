@@ -2,23 +2,13 @@ import request from "supertest";
 import app from "../index.js";
 
 describe("GET /congreso", () => {
-  let server;
-
-  beforeAll(async () => {
-    server = app.listen(); // Levanta el servidor
-  });
-
-  afterAll(async () => {
-    await server.close(); // Cierra el servidor
-  });
-
   test("Debería responder un statusCode 200", async () => {
-    const response = await request(server).get("/congreso").send();
+    const response = await request(app).get("/congreso").send();
     expect(response.statusCode).toBe(200);
   });
 
   test("Debería devolver un array con objetos", async () => {
-    const response = await request(server).get("/congreso").send();
+    const response = await request(app).get("/congreso").send();
     expect(Array.isArray(response.body)).toBe(true);
     expect(response.body).toEqual(
       expect.arrayContaining([
@@ -39,18 +29,8 @@ describe("GET /congreso", () => {
 });
 
 describe("GET /congreso/nombre/:nombre", function () {
-  let server;
-
-  beforeAll(async () => {
-    server = app.listen(); // Levanta el servidor
-  });
-
-  afterAll(async () => {
-    await server.close(); // Cierra el servidor
-  });
-
   it("Evaluacion por Nombre", async function () {
-    const res = await request(server).get("/congreso/nombre/Emprendimiento");
+    const res = await request(app).get("/congreso/nombre/Emprendimiento");
     expect(res.statusCode).toBe(200);
     expect(res.body).toBeInstanceOf(Object);
   });
@@ -58,18 +38,8 @@ describe("GET /congreso/nombre/:nombre", function () {
 
 
 describe("POST /congreso", function () {
-  let server;
-
-  beforeAll(async () => {
-    server = app.listen(); // Levanta el servidor
-  });
-
-  afterAll(async () => {
-    await server.close(); // Cierra el servidor
-  });
-
   it("Crea una Congreso", async function () {
-    const res = await request(server).post("/congreso").send({
+    const res = await request(app).post("/congreso").send({
         NombreCongreso: "Nombre de prueba",
         DescripcionCongreso: "Descripcion de prueba",
         FechaCongreso: "2024-07-20",
@@ -85,19 +55,9 @@ describe("POST /congreso", function () {
 });
 
 describe("PUT /congreso/:id", function () {
-  let server;
-
-  beforeAll(async () => {
-    server = app.listen(); // Levanta el servidor
-  });
-
-  afterAll(async () => {
-    await server.close(); // Cierra el servidor
-  });
-
   it("Actualizar un congreso", async function () {
     const idCongreso = 5;
-    const res = await request(server).put(`/congreso/${idCongreso}`).send({
+    const res = await request(app).put(`/congreso/${idCongreso}`).send({
         NombreCongreso: "Nombre de prueba",
         DescripcionCongreso: "Descripcion de prueba",
         FechaCongreso: "2024-07-20",

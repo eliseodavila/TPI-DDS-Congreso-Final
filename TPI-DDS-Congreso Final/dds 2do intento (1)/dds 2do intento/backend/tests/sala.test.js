@@ -23,9 +23,9 @@ describe("GET /sala", () => {
   });
 });
 
-describe("GET /sala/:nombre", function () {
+describe("GET /sala/nombre/:nombre", function () {
   it("Sala por Nombre", async function () {
-    const res = await request(app).get("/sala/Sala%20A");
+    const res = await request(app).get("/sala/nombre/Sala%20A");
     expect(res.statusCode).toBe(200);
     expect(res.body).toBeInstanceOf(Object);
   });

@@ -24,7 +24,7 @@ describe("GET /participante", () => {
   });
 });
 
-describe("GET /participante/:nombre", function () {
+describe("GET /participante/nombre/:nombre", function () {
   it("Participante por nombre", async function () {
     const res = await request(app).get("/participante/Luis");
     expect(res.statusCode).toBe(200);

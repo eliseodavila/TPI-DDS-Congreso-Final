@@ -23,9 +23,9 @@ describe("GET /tipocongreso", () => {
   });
 });
 
-describe("GET /tipocongreso/:nombre", function () {
+describe("GET /tipocongreso/nombre/:nombre", function () {
   it("Evaluacion por Nombre", async function () {
-    const res = await request(app).get("/tipocongreso/Seminario%20Local");
+    const res = await request(app).get("/tipocongreso/nombre/eminario%20Local");
     expect(res.statusCode).toBe(200);
     expect(res.body).toBeInstanceOf(Object);
   });

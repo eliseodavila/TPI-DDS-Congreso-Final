@@ -24,9 +24,9 @@ describe("GET /orador", () => {
     );
   });
 });
-describe("GET /orador/:nombre", function () {
+describe("GET /orador/nombre/:nombre", function () {
   it("Orador por nombre", async function () {
-    const res = await request(app).get("/orador/Luis");
+    const res = await request(app).get("/orador/nombre/Luis");
     expect(res.statusCode).toBe(200);
     expect(res.body).toBeInstanceOf(Object);
   });

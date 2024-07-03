@@ -26,9 +26,9 @@ describe("GET /patrocinador", () => {
   });
 });
 
-describe("GET /patrocinador/:nombre", function () {
+describe("GET /patrocinador/nombre/:nombre", function () {
   it("Patrocinador por Nombre", async function () {
-    const res = await request(app).get("/patrocinador/AutoTech");
+    const res = await request(app).get("/patrocinador/nombre/AutoTech");
     expect(res.statusCode).toBe(200);
     expect(res.body).toBeInstanceOf(Object);
   });

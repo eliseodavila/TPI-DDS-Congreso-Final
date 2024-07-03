@@ -26,7 +26,7 @@ describe("GET /participante", () => {
 
 describe("GET /participante/nombre/:nombre", function () {
   it("Participante por nombre", async function () {
-    const res = await request(app).get("/participante/Luis");
+    const res = await request(app).get("/participante/nombre/Luis");
     expect(res.statusCode).toBe(200);
     expect(res.body).toBeInstanceOf(Object);
   });
